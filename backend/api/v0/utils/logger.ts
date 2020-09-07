@@ -23,4 +23,3 @@ export function error(logObject: Error) {
     if (process.env.logging === 'false') { return true; }
     console.trace(`[ERROR]  ${logObject.component} ==> ${logObject.message}: ${logObject.error}`);
 }
-
