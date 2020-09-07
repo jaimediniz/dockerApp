@@ -1,7 +1,5 @@
 import express from "express";
 
-import { writeFile } from "fs";
-
 const app = express();
 
 app.get("/", (req, res) => res.json({ message: "Docker is easy 🐳" }));

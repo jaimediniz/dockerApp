@@ -1,5 +1,5 @@
 {
-  "name": "docker-demo",
+  "name": "backend-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -15,8 +15,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "@types/node": "^14.6.4",
     "@types/express": "^4.17.8",
+    "@types/node": "^14.6.4",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.0.0-pre.62",
     "typescript": "^3.5.2"
