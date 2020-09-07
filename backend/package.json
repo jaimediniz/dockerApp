@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only ./index.ts",
-    "start": "tsc && logging=false node ./api/build/index.js"
+    "prod": "tsc && logging=false node ./api/build/index.js",
+    "start": "tsc && pm2-runtime ./build/index.js"
   },
   "keywords": [],
   "author": "",
