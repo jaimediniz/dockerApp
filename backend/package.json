@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only ./build/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only ./index.ts",
     "prod": "tsc && logging=false pm2-runtime ./build/index.js",
     "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
   },

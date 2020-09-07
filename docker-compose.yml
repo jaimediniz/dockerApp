@@ -1,19 +1,34 @@
 version: "3"
 services:
   backend:
+    container_name: Backend
+    image: server/backend:v0
     build: ./backend
     ports:
       - "3000:3000"
+    networks:
+      - backend
   frontend:
+    container_name: Frontend
+    image: server/frontend:v0
     build: ./frontend
     ports:
       - "8080:8080"
+    networks:
+      - frontend
   db:
+    container_name: DB
     image: "mysql"
     environment:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - db-data:/foo
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
 
 volumes:
   db-data:
