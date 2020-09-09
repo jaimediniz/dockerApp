@@ -2,15 +2,13 @@ version: "3"
 services:
   database:
     container_name: DB
-    image: "mysql"
+    image: "postgres"
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      POSTGRES_PASSWORD: password
     volumes:
       - db-data:/foo
     networks:
       - backend
-    ports:
-      - "3306:3306"
 
   backend:
     container_name: Backend
@@ -28,7 +26,7 @@ services:
     image: server/frontend:v0
     build: ./frontend
     ports:
-      - "8080:8080"
+      - "5000:3000"
     networks:
       - frontend
     depends_on:
