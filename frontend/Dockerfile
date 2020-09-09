@@ -2,6 +2,16 @@ FROM node:12
 
 WORKDIR /app
 
-ENV PORT=8080
+COPY package*.json ./
 
-EXPOSE 8080
+RUN npm install
+
+RUN npm install serve -g
+
+COPY . .
+
+ENV PORT=3000
+
+EXPOSE 3000
+
+CMD ["npm", "start", "--production"]
