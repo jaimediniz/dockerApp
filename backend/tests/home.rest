@@ -1,2 +1,7 @@
+### Backend
 GET http://127.0.0.1:3000/api/v0
+Content-Type: application/json
+
+### DB
+GET http://127.0.0.1:3000/books
 Content-Type: application/json

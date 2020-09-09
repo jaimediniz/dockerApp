@@ -1,5 +1,17 @@
 version: "3"
 services:
+  database:
+    container_name: DB
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/foo
+    networks:
+      - backend
+    ports:
+      - "3306:3306"
+
   backend:
     container_name: Backend
     image: server/backend:v0
@@ -8,6 +20,9 @@ services:
       - "3000:3000"
     networks:
       - backend
+    depends_on:
+      - database
+
   frontend:
     container_name: Frontend
     image: server/frontend:v0
@@ -16,14 +31,7 @@ services:
       - "8080:8080"
     networks:
       - frontend
-  db:
-    container_name: DB
-    image: "mysql"
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    volumes:
-      - db-data:/foo
-    networks:
+    depends_on:
       - backend
 
 networks:
