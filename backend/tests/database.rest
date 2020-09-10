@@ -1,0 +1,15 @@
+### createTable
+GET http://127.0.0.1:3000/api/v0/DB/createTable
+Content-Type: application/json
+
+### deleteTable
+GET http://127.0.0.1:3000/api/v0/DB/deleteTable
+Content-Type: application/json
+
+### addRow
+GET http://127.0.0.1:3000/api/v0/DB/addRow
+Content-Type: application/json
+
+### getAll
+GET http://127.0.0.1:3000/api/v0/DB/getAll
+Content-Type: application/json

@@ -1,6 +1,6 @@
 import * as log from '../utils/logger';
 
-const section = 'Controllers | Auth |'
+const section = 'Controllers | Settings |'
 
 interface ReturnJson {
     msg: String;
@@ -9,7 +9,7 @@ interface ReturnJson {
 }
 
 export async function getSettings(req: any, res: any) {
-    const component = `${section} getSettings`
+    const component = log.component(`${section} getSettings`)
     try {
         if (false) {
             const returnJson: ReturnJson = {
