@@ -3,13 +3,13 @@ GET http://127.0.0.1:3000/api/v0
 Content-Type: application/json
 
 ### DB
-GET http://127.0.0.1:3000/DBcreateTable
+GET http://127.0.0.1:3000/api/v0/DBcreateTable
 Content-Type: application/json
 
 ### DB
-GET http://127.0.0.1:3000/DBaddRow
+GET http://127.0.0.1:3000/api/v0/DBaddRow
 Content-Type: application/json
 
 ### DB
-GET http://127.0.0.1:3000/DBgetAll
+GET http://127.0.0.1:3000/api/v0/DBgetAll
 Content-Type: application/json

@@ -1,24 +1,30 @@
 import express, { Application, Request, Response, NextFunction } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors';
-import { Client } from 'pg';
 
-const app = express();
 const PORT = ((process.env.PORT || 3000) as number);
 const HOST = process.env.HOST || '0.0.0.0';
-const DB_URL = process.env.DB_URL || 'localhost';
-const DB = process.env.DB || 'postgres';
-const DB_USER = process.env.DB_USER || 'database-user';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'password';
+const API_URL = process.env.API_URL || 'localhost';
 
-const client = new Client(`postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB}`);
-client.connect(err => {
-    if (err) {
-        console.error('connection error', err.stack);
-    } else {
-        console.log('connected');
-    }
-});
+const app = express();
+
+//options for cors midddleware
+const options: cors.CorsOptions = {
+    allowedHeaders: [
+        'Origin',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept',
+        'X-Access-Token',
+    ],
+    credentials: true,
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    origin: API_URL,
+    preflightContinue: false,
+};
+
+//use cors middleware
+app.use(cors(options));
 
 app.listen(PORT, HOST, () => console.log(`App listening on http://localhost:${PORT}/api/v0`));
 
@@ -26,44 +32,9 @@ app.listen(PORT, HOST, () => console.log(`App listening on http://localhost:${PO
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/DBcreateTable', (req, res) => {
-    client.query(`CREATE TABLE people (
-        id SERIAL PRIMARY KEY,
-        name text,
-        age integer
-        );INSERT INTO people(name, age)
-        VALUES ('Jaime', 25);`,
-        (err, result) => {
-            res.status(201).send({ "name": "Jaime", "age": 25 });
-        })
-});
-
-app.get('/DBaddRow', (req, res) => {
-    client.query(`INSERT INTO people(name, age)
-        VALUES ('Jaime', 25);`,
-        (err, result) => {
-            res.status(201).send({ "name": "Jaime", "age": 25 });
-        })
-});
-
-app.get('/DBgetAll', (req, res) => {
-    client.query("SELECT * FROM people;",
-        (err, result) => {
-            if (err) {
-                return res.status(404).send({
-                    error: true,
-                    message: err.message
-                });
-            }
-            console.log(result);
-            res.status(200).json(result?.rows);
-        })
-});
-
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
 app.use('/api', require('./api'));
+
+//enable pre-flight
+app.options('*', cors(options));
 
 module.exports = app;

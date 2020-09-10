@@ -4,7 +4,6 @@ declare global {
             logging?: string;
             PORT?: number;
             HOST?: string;
-            DB_URL?: string;
             DB?: string;
             DB_USER?: string;
             DB_PASSWORD?: string;
