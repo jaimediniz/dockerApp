@@ -1,15 +1,58 @@
+# ### create DB
+# POST http://127.0.0.1:3000/api/v0/db/books
+# Content-Type: application/json
+
+# ### Delete DB
+# DELETE http://127.0.0.1:3000/api/v0/db/books
+# Content-Type: application/json
+
+# ### Update DB
+# PUT http://127.0.0.1:3000/api/v0/db/books
+# Content-Type: application/json
+
+# {
+#     "name":"name"
+# }
+
 ### createTable
-GET http://127.0.0.1:3000/api/v0/DB/createTable/people
+POST http://127.0.0.1:3000/api/v0/db/books/table/people
 Content-Type: application/json
 
+{
+    "name": "text",
+    "age": "number"
+}
+
 ### deleteTable
-GET http://127.0.0.1:3000/api/v0/DB/deleteTable/people
+DELETE http://127.0.0.1:3000/api/v0/db/books/table/people
 Content-Type: application/json
 
 ### addRow
-GET http://127.0.0.1:3000/api/v0/DB/addRow/people
+PUT http://127.0.0.1:3000/api/v0/db/books/table/people
 Content-Type: application/json
 
+{
+    "name": "Jaime",
+    "age": 25
+}
+
+# ### addRow
+# DELETE http://127.0.0.1:3000/api/v0/db/books/table/people/0
+# Content-Type: application/json
+
+# ### addRow
+# PUT http://127.0.0.1:3000/api/v0/db/books/table/people/0
+# Content-Type: application/json
+
+# {
+#     "name": "Jaime",
+#     "age": 25
+# }
+
 ### getAll
-GET http://127.0.0.1:3000/api/v0/DB/getAll/people
+GET http://127.0.0.1:3000/api/v0/db/books/table/people
+Content-Type: application/json
+
+### getOne
+GET http://127.0.0.1:3000/api/v0/db/books/table/people/2
 Content-Type: application/json
