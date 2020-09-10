@@ -1,15 +1,15 @@
 ### createTable
-GET http://127.0.0.1:3000/api/v0/DB/createTable
+GET http://127.0.0.1:3000/api/v0/DB/createTable/people
 Content-Type: application/json
 
 ### deleteTable
-GET http://127.0.0.1:3000/api/v0/DB/deleteTable
+GET http://127.0.0.1:3000/api/v0/DB/deleteTable/people
 Content-Type: application/json
 
 ### addRow
-GET http://127.0.0.1:3000/api/v0/DB/addRow
+GET http://127.0.0.1:3000/api/v0/DB/addRow/people
 Content-Type: application/json
 
 ### getAll
-GET http://127.0.0.1:3000/api/v0/DB/getAll
+GET http://127.0.0.1:3000/api/v0/DB/getAll/people
 Content-Type: application/json

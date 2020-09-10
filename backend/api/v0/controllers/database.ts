@@ -1,3 +1,4 @@
+import { Request, Response } from 'express'
 import * as log from '../utils/logger';
 import { Client } from 'pg';
 
@@ -16,10 +17,9 @@ client.connect(error => {
     }
 });
 
-export async function createTable(req: any, res: any) {
+export async function createTable(req: Request, res: Response) {
     const component = log.component(`${section} createTable`)
-    const tableName = 'people'
-    client.query(`CREATE TABLE ${tableName} (id SERIAL PRIMARY KEY, name text, age integer);`,
+    client.query(`CREATE TABLE ${req.params.table} (id SERIAL PRIMARY KEY, name text, age integer);`,
         (error, result) => {
             if (error) {
                 log.error({ component, message: error.message.replace(/\"/g, "'"), error });
@@ -29,7 +29,7 @@ export async function createTable(req: any, res: any) {
                     object: {}
                 });
             }
-            const message = `table '${tableName}' was created.`
+            const message = `table '${req.params.table}' was created.`
             log.info({ component, message });
             res.status(201).send({
                 error: false,
@@ -39,10 +39,9 @@ export async function createTable(req: any, res: any) {
         })
 }
 
-export async function deleteTable(req: any, res: any) {
+export async function deleteTable(req: Request, res: Response) {
     const component = `${section} deleteTable`
-    const tableName = 'people'
-    client.query(`DROP TABLE ${tableName};`,
+    client.query(`DROP TABLE ${req.params.table};`,
         (error, result) => {
             if (error) {
                 log.error({ component, message: error.message.replace(/\"/g, "'"), error });
@@ -52,7 +51,7 @@ export async function deleteTable(req: any, res: any) {
                     object: {}
                 });
             }
-            const message = `table '${tableName}' was deleted.`
+            const message = `table '${req.params.table}' was deleted.`
             log.info({ component, message });
             res.status(201).send({
                 error: false,
@@ -62,9 +61,9 @@ export async function deleteTable(req: any, res: any) {
         })
 }
 
-export async function addRow(req: any, res: any) {
+export async function addRow(req: Request, res: Response) {
     const component = `${section} addRow`
-    client.query(`INSERT INTO people(name, age) VALUES ('Jaime', 25) RETURNING *;`,
+    client.query(`INSERT INTO ${req.params.table}(name, age) VALUES ('Jaime', 25) RETURNING *;`,
         (error, result) => {
             if (error) {
                 log.error({ component, message: error.message.replace(/\"/g, "'"), error });
@@ -91,9 +90,9 @@ export async function addRow(req: any, res: any) {
         })
 }
 
-export async function getAll(req: any, res: any) {
+export async function getAll(req: Request, res: Response) {
     const component = `${section} getAll`
-    client.query("SELECT * FROM people;",
+    client.query(`SELECT * FROM ${req.params.table};`,
         (error, result) => {
             if (error) {
                 log.error({ component, message: error.message.replace(/\"/g, "'"), error });
