@@ -53,7 +53,7 @@ export async function createTable(req: Request, res: Response) {
 }
 
 export async function deleteTable(req: Request, res: Response) {
-  const component = `${section} deleteTable`;
+  const component = log.component(`${section} deleteTable`);
   const pool = new Pool({
     connectionString: `${connectionString}/${req.params.DB}`,
   });
@@ -93,7 +93,7 @@ export async function deleteTable(req: Request, res: Response) {
 }
 
 export async function addRow(req: Request, res: Response) {
-  const component = `${section} addRow`;
+  const component = log.component(`${section} addRow`);
   const pool = new Pool({
     connectionString: `${connectionString}/${req.params.DB}`,
   });
@@ -134,7 +134,7 @@ export async function addRow(req: Request, res: Response) {
 }
 
 export async function getAll(req: Request, res: Response) {
-  const component = `${section} getAll`;
+  const component = log.component(`${section} getAll`);
   const pool = new Pool({
     connectionString: `${connectionString}/${req.params.DB}`,
   });
@@ -174,7 +174,7 @@ export async function getAll(req: Request, res: Response) {
 }
 
 export async function getOne(req: Request, res: Response) {
-  const component = `${section} getAll`;
+  const component = log.component(`${section} getAll`);
   const pool = new Pool({
     connectionString: `${connectionString}/${req.params.DB}`,
   });
