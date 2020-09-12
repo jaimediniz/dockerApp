@@ -15,22 +15,16 @@ import {
 const router = express.Router();
 
 // Modify databases
-// router.post('/:DB', createDatabase)
-// router.delete('/:DB', deleteDatabase)
+// router.route('/:DB').post(createDatabase).delete(deleteDatabase);
 
 // Modify tables
-router.post("/:DB/table/:table", createTable);
-router.delete("/:DB/table/:table", deleteTable);
-// router.put('/:DB/table/:table', updateTable)
-
-// Modify rows
-router.put("/:DB/table/:table", addRow);
-// router.delete('/:DB/table/:table/:id', deleteRow)
-// router.put('/:DB/table/:table/:id', updateRow)
-
-// Get info
-router.get("/:DB/table/:table", getAll);
-router.get("/:DB/table/:table/:id", getOne);
+router
+  .route("/:DB/table/:table")
+  .get(getAll)
+  .post(createTable)
+  .delete(deleteTable)
+  .put(addRow);
+router.route("/:DB/table/:table/:id").get(getOne); //.delete(deleteRow).put(updateRow);
 
 // Default route
 router.get("/", (req, res) => {
