@@ -1,56 +1,58 @@
 version: "3"
 services:
-  database:
-    container_name: DB
-    image: "postgres"
-    user: postgres
-    environment:
-      POSTGRES_DB: books
-      POSTGRES_USER: username
-      POSTGRES_PASSWORD: pgpassword
-    ports:
-      - "5334:5334"
-    volumes:
-      - db-data:/foo
-    networks:
-      - backend
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - backend
+    database:
+        container_name: DB
+        image: "postgres"
+        user: postgres
+        environment:
+            POSTGRES_DB: books
+            POSTGRES_USER: username
+            POSTGRES_PASSWORD: pgpassword
+        ports:
+            - "5334:5334"
+        volumes:
+            - db-data:/foo
+        networks:
+            - backend
 
-  backend:
-    container_name: Backend
-    image: server/backend:v0
-    build: ./backend
-    environment:
-      DB: books
-      DB_USER: username
-      DB_PASSWORD: pgpassword
-    ports:
-      - "3000:3000"
-    networks:
-      - backend
-    depends_on:
-      - database
+    adminer:
+        container_name: Adminer
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        networks:
+            - backend
 
-  frontend:
-    container_name: Frontend
-    image: server/frontend:v0
-    build: ./frontend
-    ports:
-      - "5000:3000"
-    networks:
-      - frontend
-    depends_on:
-      - backend
+    backend:
+        container_name: Backend
+        image: server/backend:v0
+        build: ./backend
+        environment:
+            DB: books
+            DB_USER: username
+            DB_PASSWORD: pgpassword
+        ports:
+            - "3000:3000"
+        networks:
+            - backend
+        depends_on:
+            - database
+
+    frontend:
+        container_name: Frontend
+        image: server/frontend:v0
+        build: ./frontend
+        ports:
+            - "5000:3000"
+        networks:
+            - frontend
+        depends_on:
+            - backend
 
 networks:
-  frontend:
-  backend:
+    frontend:
+    backend:
 
 volumes:
-  db-data:
+    db-data:

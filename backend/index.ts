@@ -10,24 +10,24 @@ const app = express();
 
 //options for cors midddleware
 const options: cors.CorsOptions = {
-  allowedHeaders: [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Accept",
-    "X-Access-Token",
-  ],
-  credentials: true,
-  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-  origin: API_URL,
-  preflightContinue: false,
+    allowedHeaders: [
+        "Origin",
+        "X-Requested-With",
+        "Content-Type",
+        "Accept",
+        "X-Access-Token",
+    ],
+    credentials: true,
+    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+    origin: API_URL,
+    preflightContinue: false,
 };
 
 //use cors middleware
 app.use(cors(options));
 
 app.listen(PORT, HOST, () =>
-  console.log(`App listening on http://localhost:${PORT}/api/v0`)
+    console.log(`App listening on http://localhost:${PORT}/api/v0`)
 );
 
 // app.use(cors({ origin: ['http://127.0.0.1:4200'], credentials: true }));

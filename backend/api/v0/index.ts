@@ -4,7 +4,7 @@ import * as log from "./utils/logger";
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) =>
-  res.json({ message: "Docker is easy 🐳" })
+    res.json({ message: "Docker is easy 🐳" })
 );
 router.use("/DB", require("./routes/database"));
 

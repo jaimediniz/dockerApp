@@ -1,29 +1,31 @@
 {
-  "name": "backend-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only ./index.ts",
-    "prod": "tsc && logging=false pm2-runtime ./build/index.js",
-    "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "pg": "^8.3.3"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.7",
-    "@types/express": "^4.17.8",
-    "@types/node": "^14.6.4",
-    "@types/pg": "^7.14.4",
-    "ts-node": "^9.0.0",
-    "ts-node-dev": "^1.0.0-pre.62",
-    "typescript": "^3.5.2"
-  }
+    "name": "backend-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "watch": "tsc -w",
+        "dev": "concurrently \"npm run watch\" \"nodemon ./build/index.js\"",
+        "prod": "tsc && logging=false pm2-runtime ./build/index.js",
+        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "pg": "^8.3.3"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.7",
+        "@types/express": "^4.17.8",
+        "@types/node": "^14.6.4",
+        "@types/pg": "^7.14.4",
+        "concurrently": "^5.3.0",
+        "nodemon": "^2.0.4",
+        "ts-node": "^9.0.0",
+        "ts-node-dev": "^1.0.0-pre.62",
+        "typescript": "^3.5.2"
+    }
 }
