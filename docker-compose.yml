@@ -43,6 +43,7 @@ services:
         container_name: Frontend
         image: server/frontend:v0
         build: ./frontend
+        tty: true
         ports:
             - "5000:3000"
         networks:
