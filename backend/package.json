@@ -5,9 +5,10 @@
     "main": "index.ts",
     "scripts": {
         "watch": "tsc -w",
-        "dev": "concurrently \"npm run watch\" \"nodemon ./build/index.js\"",
-        "prod": "tsc && logging=false pm2-runtime ./build/index.js",
-        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
+        "build": "tsc",
+        "dev": "concurrently -k -n \"API,WEB\" -c \"blue,magenta\" \"npm run watch\" \"wait-on ./build/index.js && nodemon ./build/index.js\"",
+        "prod": "logging=false pm2-runtime ./build/index.js",
+        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run build && npm run prod ; else echo \"dev\" && npm run dev ; fi"
     },
     "keywords": [],
     "author": "",
@@ -26,6 +27,7 @@
         "nodemon": "^2.0.4",
         "ts-node": "^9.0.0",
         "ts-node-dev": "^1.0.0-pre.62",
-        "typescript": "^3.5.2"
+        "typescript": "^3.5.2",
+        "wait-on": "^5.2.0"
     }
 }
