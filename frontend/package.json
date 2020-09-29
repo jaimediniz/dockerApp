@@ -16,7 +16,7 @@
         "typescript": "~3.7.2"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run build && npm run serve ; else echo \"dev\" && react-scripts start ; fi",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
