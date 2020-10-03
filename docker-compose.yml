@@ -32,8 +32,9 @@ services:
             DB: books
             DB_USER: username
             DB_PASSWORD: pgpassword
+            API_URL: "http://localhost:5000"
         ports:
-            - "3000:3000"
+            - "4000:3000"
         networks:
             - backend
         depends_on:
