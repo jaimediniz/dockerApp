@@ -1,13 +1,13 @@
 # ### create DB
-# POST http://127.0.0.1:3000/api/v0/db/books
+# POST http://127.0.0.1:4000/api/v0/db/books
 # Content-Type: application/json
 
 # ### Delete DB
-# DELETE http://127.0.0.1:3000/api/v0/db/books
+# DELETE http://127.0.0.1:4000/api/v0/db/books
 # Content-Type: application/json
 
 # ### Update DB
-# PUT http://127.0.0.1:3000/api/v0/db/books
+# PUT http://127.0.0.1:4000/api/v0/db/books
 # Content-Type: application/json
 
 # {
@@ -15,7 +15,7 @@
 # }
 
 ### createTable
-POST http://127.0.0.1:3000/api/v0/db/books/table/people
+POST http://127.0.0.1:4000/api/v0/db/books/table/people
 Content-Type: application/json
 
 {
@@ -24,11 +24,11 @@ Content-Type: application/json
 }
 
 ### deleteTable
-DELETE http://127.0.0.1:3000/api/v0/db/books/table/people
+DELETE http://127.0.0.1:4000/api/v0/db/books/table/people
 Content-Type: application/json
 
 ### addRow
-PUT http://127.0.0.1:3000/api/v0/db/books/table/people
+PUT http://127.0.0.1:4000/api/v0/db/books/table/people
 Content-Type: application/json
 
 {
@@ -37,11 +37,11 @@ Content-Type: application/json
 }
 
 # ### addRow
-# DELETE http://127.0.0.1:3000/api/v0/db/books/table/people/0
+# DELETE http://127.0.0.1:4000/api/v0/db/books/table/people/0
 # Content-Type: application/json
 
 # ### addRow
-# PUT http://127.0.0.1:3000/api/v0/db/books/table/people/0
+# PUT http://127.0.0.1:4000/api/v0/db/books/table/people/0
 # Content-Type: application/json
 
 # {
@@ -50,9 +50,13 @@ Content-Type: application/json
 # }
 
 ### getAll
-GET http://127.0.0.1:3000/api/v0/db/books/table/people
+GET http://127.0.0.1:4000/api/v0/db/books/table/people
 Content-Type: application/json
 
 ### getOne
-GET http://127.0.0.1:3000/api/v0/db/books/table/people/2
+GET http://127.0.0.1:4000/api/v0/db/books/table/people/2
+Content-Type: application/json
+
+### getOneTest
+GET http://127.0.0.1:4000/api/v0/db/test
 Content-Type: application/json

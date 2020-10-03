@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 
-function Card(props: { date: string; text: string }) {
+function Card(props: { key:number; date: string; text: string }) {
     return (
         <article className="card">
             <header className="card-header">

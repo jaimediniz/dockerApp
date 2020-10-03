@@ -10,6 +10,7 @@ import {
   // updateRow,
   getAll,
   getOne,
+  getOneTest,
 } from "../controllers/database";
 
 const router = express.Router();
@@ -25,6 +26,7 @@ router
   .delete(deleteTable)
   .put(addRow);
 router.route("/:DB/table/:table/:id").get(getOne); //.delete(deleteRow).put(updateRow);
+router.route("/test").get(getOneTest);
 
 // Default route
 router.get("/", (req, res) => {

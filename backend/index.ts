@@ -2,13 +2,13 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 
-const PORT = (process.env.PORT || 3000) as number;
+const PORT = (process.env.PORT || 4000) as number;
 const HOST = process.env.HOST || "0.0.0.0";
-const API_URL = process.env.API_URL || "localhost";
+const API_URL = process.env.API_URL || "http://localhost:3000";
 
 const app = express();
 
-//options for cors midddleware
+//options for cors middleware
 const options: cors.CorsOptions = {
     allowedHeaders: [
         "Origin",

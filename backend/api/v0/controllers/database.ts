@@ -212,3 +212,14 @@ export async function getOne(req: Request, res: Response) {
     });
   });
 }
+
+export async function getOneTest(req: Request, res: Response) {
+  return res.status(200).json({
+    error: false,
+    message: "",
+    object: Array.from(
+          { length: 25 },
+          (v, k) => k + 1
+      ),
+  });
+}
