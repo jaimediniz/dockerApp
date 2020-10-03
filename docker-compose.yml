@@ -44,8 +44,9 @@ services:
         image: server/frontend:v0
         build: ./frontend
         tty: true
+        stdin_open: true
         ports:
-            - "5000:3000"
+            - "5000:5000"
         networks:
             - frontend
         depends_on:

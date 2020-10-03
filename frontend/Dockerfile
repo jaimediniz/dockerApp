@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:alpine
 
 WORKDIR /app
 
@@ -8,10 +8,14 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN npm install react-scripts@3.4.3 -g --silent
 
-ENV PORT=3000
+RUN npm install serve -g --silent
 
-EXPOSE 3000
+RUN npm run build --production
 
-CMD ["npm", "run", "start", "--production"]
+ENV PORT=5000
+
+EXPOSE 5000
+
+CMD ["npm", "start", "--production"]

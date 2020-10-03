@@ -13,10 +13,11 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-scripts": "3.4.3",
+        "serve": "^11.3.2",
         "typescript": "~3.7.2"
     },
     "scripts": {
-        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run build && npm run serve ; else echo \"dev\" && react-scripts start ; fi",
+        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run serve ; else echo \"dev\" && react-scripts start ; fi",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",

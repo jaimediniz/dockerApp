@@ -8,7 +8,7 @@
         "build": "tsc",
         "dev": "concurrently -k -n \"API,WEB\" -c \"blue,magenta\" \"npm run watch\" \"wait-on ./build/index.js && nodemon ./build/index.js\"",
         "prod": "logging=false pm2-runtime ./build/index.js",
-        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run build && npm run prod ; else echo \"dev\" && npm run dev ; fi"
+        "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
     },
     "keywords": [],
     "author": "",

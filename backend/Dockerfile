@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:alpine
 
 WORKDIR /app
 
@@ -9,6 +9,8 @@ RUN npm install
 RUN npm install pm2 -g
 
 COPY . .
+
+RUN npm run build
 
 ENV PORT=3000
 
