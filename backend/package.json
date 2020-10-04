@@ -6,7 +6,7 @@
     "scripts": {
         "watch": "tsc -w",
         "build": "tsc",
-        "dev": "concurrently -k -n \"API,WEB\" -c \"blue,magenta\" \"npm run watch\" \"wait-on ./build/index.js && nodemon ./build/index.js\"",
+        "dev": "concurrently -k -n \"TSC,API\" -c \"red,magenta\" \"npm run watch\" \"wait-on ./build/index.js && nodemon ./build/index.js\"",
         "prod": "logging=false pm2-runtime ./build/index.js",
         "start": "if test \"$NODE_ENV\" = \"production\" ; then echo \"prod\" && npm run prod ; else echo \"dev\" && npm run dev ; fi"
     },
