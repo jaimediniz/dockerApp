@@ -1,8 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef, useCallback } from "react";
 
 export default function useHorizontalScroll() {
     const elRef = useRef() as any;
-    useEffect(() => {
+    const setRef = useCallback((ref) => {
+        elRef.current = ref
         const el = elRef.current;
         if (el) {
             const onWheel = (e: any) => {
@@ -15,5 +16,5 @@ export default function useHorizontalScroll() {
             return () => el.removeEventListener("wheel", onWheel);
         }
     }, [elRef]);
-    return elRef;
+    return [setRef];
 }
