@@ -20,6 +20,9 @@ const isLocalhost = Boolean(
     )
 );
 
+const publicVapidKey =
+  'BD3DSzJfoHbfxxOhup3CVfAqR1wNODMD5esnwspb4AYNZDFeB3kB0uU3OAUjxXcZonuUqN0staw0yYh-9L5wn7E';
+
 type Config = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
@@ -28,19 +31,10 @@ type Config = {
 export function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(
-      process.env.PUBLIC_URL,
-      window.location.href
-    );
-    if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
-      return;
-    }
+    // const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/swPushListener.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
@@ -65,14 +59,26 @@ export function register(config?: Config) {
 function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
-    .then(registration => {
+    .then((registration) => {
       registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        if (installingWorker == null) {
+        var serviceWorker: any;
+        if (registration.installing) {
+          serviceWorker = registration.installing;
+          console.log('Service worker installing');
+        } else if (registration.waiting) {
+          serviceWorker = registration.waiting;
+          console.log('Service worker installed & waiting');
+        } else if (registration.active) {
+          serviceWorker = registration.active;
+          console.log('Service worker active');
+        }
+
+        if (serviceWorker === null) {
           return;
         }
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
+
+        serviceWorker.onstatechange = () => {
+          if (serviceWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
@@ -97,13 +103,44 @@ function registerValidSW(swUrl: string, config?: Config) {
                 config.onSuccess(registration);
               }
             }
+          } else if (
+            serviceWorker.state === 'activated' &&
+            swUrl.indexOf('swPushListener') > 0
+          ) {
+            registration.pushManager
+              .subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+              })
+              .then((subscription) => {
+                fetch('http://127.0.0.1:4000/api/v0/subscribe', {
+                  method: 'post',
+                  body: JSON.stringify(subscription),
+                  headers: {
+                    'content-type': 'application/json'
+                  }
+                });
+              });
           }
         };
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error during service worker registration:', error);
     });
+}
+
+function urlBase64ToUint8Array(base64String: string) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }
 
 function checkValidServiceWorker(swUrl: string, config?: Config) {
@@ -111,7 +148,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
   fetch(swUrl, {
     headers: { 'Service-Worker': 'script' }
   })
-    .then(response => {
+    .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
       const contentType = response.headers.get('content-type');
       if (
@@ -119,7 +156,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         (contentType != null && contentType.indexOf('javascript') === -1)
       ) {
         // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then(registration => {
+        navigator.serviceWorker.ready.then((registration) => {
           registration.unregister().then(() => {
             window.location.reload();
           });
@@ -139,10 +176,10 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
-      .then(registration => {
+      .then((registration) => {
         registration.unregister();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error.message);
       });
   }

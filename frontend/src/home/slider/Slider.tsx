@@ -37,7 +37,7 @@ function Slider() {
     }
 
     const cards = items.map((number:number) => (
-        <Card key={number} date={`May ${number}th 2020`} text="Card tricks are fun."></Card>
+        <Card key={number} id={number} date={`May ${number}th 2020`} text="Card tricks are fun."></Card>
     ));
     return (
       <section ref={scrollRef} className="slider">
