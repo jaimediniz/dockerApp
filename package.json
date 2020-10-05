@@ -1,16 +1,16 @@
 {
-    "name": "docker-demo",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.ts",
-    "scripts": {
-        "dev": "concurrently \"cd backend && npm run dev\"",
-        "devall": "concurrently -n \"BACKEND,FRONTEND\" -c \"green,blue\" \"cd backend && npm run dev\" \"cd frontend && npm start\" "
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "concurrently": "^5.3.0"
-    }
+  "name": "docker-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\"",
+    "devall": "concurrently -n \"BACKEND,FRONTEND\" -c \"green,blue\" \"cd backend && npm run dev\" \"cd frontend && npm start\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
 }

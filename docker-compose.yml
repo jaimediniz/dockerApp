@@ -1,61 +1,61 @@
-version: "3"
+version: '3'
 services:
-    database:
-        container_name: DB
-        image: "postgres"
-        user: postgres
-        environment:
-            POSTGRES_DB: books
-            POSTGRES_USER: username
-            POSTGRES_PASSWORD: pgpassword
-        ports:
-            - "5334:5334"
-        volumes:
-            - db-data:/foo
-        networks:
-            - backend
+  database:
+    container_name: DB
+    image: 'postgres'
+    user: postgres
+    environment:
+      POSTGRES_DB: books
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: pgpassword
+    ports:
+      - '5334:5334'
+    volumes:
+      - db-data:/foo
+    networks:
+      - backend
 
-    adminer:
-        container_name: Adminer
-        image: adminer
-        restart: always
-        ports:
-            - 8080:8080
-        networks:
-            - backend
+  adminer:
+    container_name: Adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
 
-    backend:
-        container_name: Backend
-        image: server/backend:v0
-        build: ./backend
-        environment:
-            DB: books
-            DB_USER: username
-            DB_PASSWORD: pgpassword
-            API_URL: "http://localhost:5000"
-        ports:
-            - "4000:3000"
-        networks:
-            - backend
-        depends_on:
-            - database
+  backend:
+    container_name: Backend
+    image: server/backend:v0
+    build: ./backend
+    environment:
+      DB: books
+      DB_USER: username
+      DB_PASSWORD: pgpassword
+      API_URL: 'http://localhost:5000'
+    ports:
+      - '4000:3000'
+    networks:
+      - backend
+    depends_on:
+      - database
 
-    frontend:
-        container_name: Frontend
-        image: server/frontend:v0
-        build: ./frontend
-        tty: true
-        stdin_open: true
-        ports:
-            - "5000:5000"
-        networks:
-            - frontend
-        depends_on:
-            - backend
+  frontend:
+    container_name: Frontend
+    image: server/frontend:v0
+    build: ./frontend
+    tty: true
+    stdin_open: true
+    ports:
+      - '5000:5000'
+    networks:
+      - frontend
+    depends_on:
+      - backend
 
 networks:
-    frontend:
-    backend:
+  frontend:
+  backend:
 
 volumes:
-    db-data:
+  db-data:

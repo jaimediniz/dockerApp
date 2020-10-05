@@ -1,6 +1,6 @@
-import * as log from "../utils/logger";
+import * as log from '../utils/logger';
 
-const section = "Controllers | Settings |";
+const section = 'Controllers | Settings |';
 
 interface ReturnJson {
   msg: String;
@@ -13,24 +13,24 @@ export async function getSettings(req: any, res: any) {
   try {
     if (false) {
       const returnJson: ReturnJson = {
-        msg: "Not found",
+        msg: 'Not found',
         error: true,
-        data: {},
+        data: {}
       };
       return res.status(401).json(returnJson);
     }
     const returnJson: ReturnJson = {
-      msg: "",
+      msg: '',
       error: false,
-      data: {},
+      data: {}
     };
     return res.status(200).json(returnJson);
   } catch (error) {
-    log.error({ component, message: "Error", error });
+    log.error({ component, message: 'Error', error });
     const returnJson: ReturnJson = {
-      msg: "",
+      msg: '',
       error: true,
-      data: {},
+      data: {}
     };
     return res.status(500).json(returnJson);
   }

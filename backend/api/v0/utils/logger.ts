@@ -10,7 +10,7 @@ interface Error {
 }
 
 export const component =
-  process.env.logging === "false"
+  process.env.logging === 'false'
     ? (component: String) => {
         return component;
       }
@@ -20,14 +20,14 @@ export const component =
       };
 
 export const info =
-  process.env.logging === "false"
+  process.env.logging === 'false'
     ? (logObject: Message) => {}
     : (logObject: Message) => {
         console.info(`[INFO]  ${logObject.component} ==> ${logObject.message}`);
       };
 
 export const warning =
-  process.env.logging === "false"
+  process.env.logging === 'false'
     ? (logObject: Message) => {}
     : (logObject: Message) => {
         console.warn(
@@ -36,7 +36,7 @@ export const warning =
       };
 
 export const error =
-  process.env.logging === "false"
+  process.env.logging === 'false'
     ? (logObject: Error) => {}
     : (logObject: Error) => {
         console.trace(

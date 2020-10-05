@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import {
   // createDatabase,
   // deleteDatabase,
@@ -10,8 +10,8 @@ import {
   // updateRow,
   getAll,
   getOne,
-  getOneTest,
-} from "../controllers/database";
+  getOneTest
+} from '../controllers/database';
 
 const router = express.Router();
 
@@ -20,20 +20,20 @@ const router = express.Router();
 
 // Modify tables
 router
-  .route("/:DB/table/:table")
+  .route('/:DB/table/:table')
   .get(getAll)
   .post(createTable)
   .delete(deleteTable)
   .put(addRow);
-router.route("/:DB/table/:table/:id").get(getOne); //.delete(deleteRow).put(updateRow);
-router.route("/test").get(getOneTest);
+router.route('/:DB/table/:table/:id').get(getOne); //.delete(deleteRow).put(updateRow);
+router.route('/test').get(getOneTest);
 
 // Default route
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   const response = {
     error: false,
-    msg: "DB",
-    data: {},
+    msg: 'DB',
+    data: {}
   };
   return res.status(200).json(response);
 });
