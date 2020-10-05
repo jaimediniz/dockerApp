@@ -15,7 +15,8 @@ function Card(props: { key: number; id: number; date: string; text: string }) {
 
 function getInfo(id: number): any {
   fetch(`http://127.0.0.1:4000/api/v0/getOne/${id}`, {
-    method: 'get',
+    method: 'post',
+    body: localStorage.getItem('pushNotificationSubscription'),
     headers: {
       'content-type': 'application/json'
     }

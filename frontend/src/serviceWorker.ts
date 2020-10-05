@@ -113,6 +113,10 @@ function registerValidSW(swUrl: string, config?: Config) {
                 applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
               })
               .then((subscription) => {
+                localStorage.setItem(
+                  'pushNotificationSubscription',
+                  JSON.stringify(subscription)
+                );
                 fetch('http://127.0.0.1:4000/api/v0/subscribe', {
                   method: 'post',
                   body: JSON.stringify(subscription),

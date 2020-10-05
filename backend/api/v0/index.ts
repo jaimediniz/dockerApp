@@ -14,12 +14,10 @@ setVapidDetails('mailto:test@test.com', publicVapidKey, privateVapidKey);
 
 const router = express.Router();
 
-var subscription: any;
-
 // Subscribe Route
 router.route('/subscribe').post((req: Request, res: Response) => {
   // Get pushSubscription Object
-  subscription = req.body;
+  const subscription = req.body;
 
   // Send 201 - Created
   res.status(201).json({});
@@ -38,8 +36,11 @@ router.route('/subscribe').post((req: Request, res: Response) => {
   });
 });
 
-router.route('/getOne/:id').get((req: Request, res: Response) => {
-  // Send 201 - Created
+router.route('/getOne/:id').post((req: Request, res: Response) => {
+  // Get pushSubscription Object
+  const subscription = req.body;
+
+  // Send 200 - OK
   res.status(200).json({});
 
   // Create Payload
