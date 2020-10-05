@@ -4,7 +4,7 @@ import cors from "cors";
 
 const PORT = (process.env.PORT || 4000) as number;
 const HOST = process.env.HOST || "0.0.0.0";
-const API_URL = process.env.API_URL || "http://localhost:3000";
+const API_URL = process.env.API_URL || ['http://localhost:3000', 'http://localhost:5000'];
 
 const app = express();
 
